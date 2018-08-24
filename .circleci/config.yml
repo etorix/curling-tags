@@ -8,7 +8,7 @@ jobs:
 
     steps: 
       - checkout
-      - run: bash script3
+      - run: bash script_test
       - store_artifacts:
           path: .
              
