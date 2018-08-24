@@ -7,12 +7,14 @@ start=1
 for ((i=1 ; i<=$cols ; i++))
 do
 tag="$(cut -d',' -f"$i" <<< "$list")"
-response="$(curl -i -H "Authorization: Bearer $token" "https://registry-1.docker.io/v2/circleci/php/manifests/"${tag}"")"
-missing="$(grep "MANIFEST_UNKNOWN" <<< "$response")"
-if [[ $missing ]]
+response="$(curl -iI -H "Authorization: Bearer $token" "https://registry-1.docker.io/v2/circleci/php/manifests/"${tag}"")"
+response_stripped="$(echo "$response" | tr '\r' ' ' | tr '\n' ' ' | sed 's/ \{3,\}/ /g' | sed 's/   / /g')"
+missing="$(grep -o "404" <<< "$response_stripped")"
+if [ "$missing" == 404 ]
 then
-echo -e ""$tag" is missing!" >> missing.txt | tee missing.txt
+echo -e ""$tag" is missing!" >> missing.txt
+echo -e "$tag is missing!"
 else
-echo "ldc soundsystem - we still got it"
+echo "lcd soundsystem - we still got it"
 fi  
 done
