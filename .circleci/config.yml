@@ -18,7 +18,7 @@ jobs:
              missing="$(grep "MANIFEST_UNKNOWN" <<< "$response")"
              if [[ $missing ]]
              then
-             echo -e ""$tag" is missing!" >> missing.txt | tee missing.txt
+             echo -e ""$tag" is missing!" >> missing.txt
              else
              echo "ldc soundsystem - we still got it"
              fi
