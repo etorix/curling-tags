@@ -1,0 +1,3 @@
+token="$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:circleci:pull" | jq --raw-output .token)"
+echo $token
+curl -s -H "Authorization: Bearer "${token}"" -H "Accept: application/vnd.docker.distribution.manifest.v2+json" "https://index.docker.io/v2/php/tags/list"
