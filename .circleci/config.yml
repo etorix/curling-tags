@@ -8,6 +8,21 @@ jobs:
 
     steps: 
       - run: |
-             token=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:circleci:pull" | jq -r '.token')
-             curl -i -H "Authorization: Bearer $token" "https://registry-1.docker.io/v2/circleci/manifests/latest"             
+             token=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:circleci/php:pull" | jq -r '.token')
+             list="$(curl -s -H "Authorization: Bearer "${token}"" -H "Accept: application/vnd.docker.distribution.manifest.v2+json" "https://registry-1.docker.io/v2/circleci/php/tags/list" | sed 's/.*\[//' | sed 's/\]\"\}//' | tr -d '"')"
+             cols="$(awk -F',' '{print NF}' <<< "$list")"
+             for ((i=1 ; i<=$cols ; i++))
+             do
+             tag="$(cut -d',' -f"$i" <<< "$list")"
+             response="$(curl -i -H "Authorization: Bearer $token" "https://registry-1.docker.io/v2/circleci/php/manifests/"${tag}"")"
+             404="$(grep "MANIFEST_UNKNOWN" <<< "$response")"
+             if [[ $404 ]]
+             then
+             echo -e ""$tag" is missing!" >> missing.txt | tee missing.txt
+             else
+             echo "ldc soundsystem - we still got it"
+             fi
+             done
+      - store_artifacts:
+          path: .
              
