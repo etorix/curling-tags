@@ -4,7 +4,7 @@ jobs:
     machine:
       image: circleci/classic:201708-01
 
-    working_directory: $HOME
+    working_directory: $HOME/circledir
 
     steps: 
       - checkout
