@@ -7,7 +7,6 @@ jobs:
     working_directory: $HOME
 
     steps: 
-      - run: sudo apt-get install jq
       - run: |
              token=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:circleci:pull" | jq -r '.token')
              curl -i -H "Authorization: Bearer $token" "https://registry-1.docker.io/v2/library/circleci/manifests/latest"             
