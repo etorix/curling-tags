@@ -6,9 +6,11 @@ jobs:
 
     working_directory: $HOME/circledir
 
+
     steps: 
+      - checkout
       - run: |
-             bash -x script_test
+             bash -x ./circledir/scripts/script_test
        
       - store_artifacts: 
           path: $HOME/circledir      
