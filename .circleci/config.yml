@@ -13,8 +13,8 @@ jobs:
              cd $HOME
              ls -al
       - run: |
-             bash -x $HOME/circledir/scripts/script
+             bash $HOME/circledir/scripts/script
        
       - store_artifacts: 
-          path: $HOME/circledir      
+          path: $HOME/circledir/scripts/script
        
