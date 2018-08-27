@@ -9,7 +9,9 @@ jobs:
 
     steps: 
       - checkout
-      - run: ls -al
+      - run: |
+             cd $HOME
+             ls -al
       - run: |
              bash -x ./circledir/scripts/script_test
        
