@@ -4,7 +4,7 @@ jobs:
     machine:
       image: circleci/classic:201708-01
 
-    working_directory: $HOME/circledir
+    working_directory: $HOME/tags
 
 
     steps: 
@@ -14,6 +14,6 @@ jobs:
              ls -al $HOME/circledir
       - run: |
              mkdir /tmp/artifacts
-             bash $HOME/circledir/missman.sh
+             bash $HOME/tags/circledir/missman.sh
       - store_artifacts: 
           path: /tmp/artifacts
