@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#
 repo="$1"
 token="$(curl -sSL "https://auth.docker.io/token?service=registry.docker.io&scope=repository:circleci/"${repo}":pull" | jq --raw-output .token)" 
 #list="$(curl -s -H "Authorization: Bearer "${token}"" -H "Accept: application/vnd.docker.distribution.manifest.v2+json" "https://registry-1.docker.io/v2/circleci/php/tags/list" | sed 's/.*\[//' | sed 's/\]\"\}//' | tr -d '"')"
