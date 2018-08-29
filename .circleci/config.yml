@@ -10,10 +10,7 @@ jobs:
     steps: 
       - checkout
       - run: |
-             cd $HOME
-             ls -al $HOME/circledir
-      - run: |
              mkdir /tmp/artifacts
-             bash $HOME/tags/circledir/missman.sh
+             bash circledir/missman.sh
       - store_artifacts: 
           path: /tmp/artifacts
