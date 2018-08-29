@@ -11,6 +11,6 @@ jobs:
       - checkout
       - run: |
              mkdir /tmp/artifacts
-             bash circledir/missman.sh
+             bash $HOME/tags/circledir/missman.sh
       - store_artifacts: 
           path: /tmp/artifacts
