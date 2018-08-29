@@ -13,8 +13,7 @@ jobs:
              cd $HOME
              ls -al
       - run: |
-             bash $HOME/circledir/scripts/script
-       
+             mkdir /tmp/artifacts
+             bash $HOME/circledir/missman.sh
       - store_artifacts: 
-          path: $HOME/circledir/scripts/script
-       
+          path: /tmp/artifacts
