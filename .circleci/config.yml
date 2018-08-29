@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: |
              cd $HOME
-             ls -al
+             ls -al $HOME/circledir
       - run: |
              mkdir /tmp/artifacts
              bash $HOME/circledir/missman.sh
